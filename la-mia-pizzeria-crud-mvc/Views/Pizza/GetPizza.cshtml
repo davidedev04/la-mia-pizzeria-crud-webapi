@@ -1,0 +1,27 @@
+﻿﻿@using la_mia_pizzeria_crud_mvc.Data
+@model Pizza
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card align-items-center py-2" style="width: 70vw;">
+        <img src="@Model.Image" class="card-img-top" alt="@Model.Name" style="width: 50%">
+        <div class="card-body">
+            <h5 class="card-title text-center">@Model.Name</h5>
+            <p class="card-text text-center">@Model.Description</p>
+            <h4 class="card-text text-center">@Model.Price €</h4>
+            <span class="card-text text-center">@Model.GetDisplayedCategory()</span>
+            <div class="card-text text-center">
+                Ingredienti:
+                <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                    @foreach (var ingrediente in Model.Ingredients)
+                    {
+                        <div style="background-color: #AAAAAA; display: flex; justify-content: center; align-items: center;
+                            border-radius: 3px; border-style: solid; border-color: #AAAAAA; padding: 2px;">
+                            @ingrediente.IngName
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <a href="@Url.Action("Index", "Pizza")" class="btn btn-primary">BACK</a>
+    </div>
+</div>
