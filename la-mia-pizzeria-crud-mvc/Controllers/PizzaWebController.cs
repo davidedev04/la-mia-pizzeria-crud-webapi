@@ -58,15 +58,15 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdatePizza(int id, [FromBody] Pizza Pizza)
-        {
-            var oldPizza = PizzaManager.GetPizza(id);
-            if (oldPizza == null)
-                return NotFound("ERRORE");
-            PizzaManager.UpdatePizza(id, Pizza.Name, Pizza.Description, Pizza.CategoryId, null);
-            return Ok();
-        }
+        //[HttpPut("{id}")]
+        //public IActionResult UpdatePizza(int id, [FromBody] Pizza Pizza)
+        //{
+        //    var oldPizza = PizzaManager.GetPizza(id);
+        //    if (oldPizza == null)
+        //        return NotFound("ERRORE");
+        //    PizzaManager.UpdatePizza(id, Pizza.Name, Pizza.Description, Pizza.CategoryId, null);
+        //    return Ok();
+        //}
 
 
     }
