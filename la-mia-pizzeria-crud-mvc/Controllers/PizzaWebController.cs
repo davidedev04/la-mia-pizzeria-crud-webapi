@@ -2,6 +2,7 @@
 using la_mia_pizzeria_crud_mvc.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace la_mia_pizzeria_crud_mvc.Controllers
 {
@@ -9,6 +10,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
     [ApiController]
     public class PizzaWebController : ControllerBase
     {
+
         [HttpGet]
         public IActionResult GetAllPizza(string? name)
         {
@@ -46,6 +48,26 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 return NotFound("ERRORE");
             return Ok(Pizza);
         }
+
+        [HttpPost]
+        // Post deve essere incluso nella richiesta POST
+        // (come documento JSON che il framework deserializzerà automaticamente in oggetto di tipo Post)
+        public IActionResult CreatePizza([FromBody] Pizza Pizza)
+        {
+            PizzaManager.InsertPizza(Pizza, null);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdatePizza(int id, [FromBody] Pizza Pizza)
+        {
+            var oldPizza = PizzaManager.GetPizza(id);
+            if (oldPizza == null)
+                return NotFound("ERRORE");
+            PizzaManager.UpdatePizza(id, Pizza.Name, Pizza.Description, Pizza.CategoryId, null);
+            return Ok();
+        }
+
 
     }
 }
